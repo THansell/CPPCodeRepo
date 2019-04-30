@@ -11,7 +11,7 @@ class BCSAlphaString {
     BCSAlphaString(int, std::string);
     void setBCSAlphaString(const std::string);
     void operator = (const std::string );
-    void toBuffer(char * );
+    void toBuffer(char *);
     void fromBuffer(char *);
     std::string toString();
     int getSize();
