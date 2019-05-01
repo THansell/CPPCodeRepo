@@ -8,12 +8,26 @@ Argv::Argv(int argc, char* argv[]) {
 }
 
 
-int Argv::size() {
+size_t Argv::size() {
     return this->command_line.size() ;
 }
 
-void Argv::erase(int n) {
-    this->command_line.erase(n);
+size_t Argv::numArgs() {
+	if (this->size() == 0) {
+		return(this->size());
+	}
+	return(this->size() - 1);
+}
+
+void Argv::erase(size_t n) {
+    this->command_line.erase(this->command_line.begin()+n);
+}
+
+std::string Argv::program_name() {
+	if (this->size() == 0) {
+		return("not set");
+	}
+	return(this->command_line[0]);
 }
 
 void Argv::clear() {
@@ -21,14 +35,14 @@ void Argv::clear() {
 }
 
 void Argv::process(int argc, char* argv[]) {
-    this->command_line.
-    for(int i = 0; i < argc; i++) {
-    
+	for (int i = 0; i < argc; i++) {
+		this->command_line.push_back(std::string(argv[i]));
+	}
 }
 
 std::string Argv::operator[] (int n) {
     if (this->command_line.size() > 0 && n < this->command_line.size()) {
-        return(this->command_line[n]
+		return(this->command_line[n]);
     }
     return "" ;
 }
@@ -39,4 +53,9 @@ void Argv::replace(int n, std::string str) {
 
 void Argv::push_back(std::string str) {
     this->command_line.push_back(str);
+}
+
+void Argv::push_back(char * cstr) {
+	std::string str(cstr);
+	this->command_line.push_back(str);
 }
